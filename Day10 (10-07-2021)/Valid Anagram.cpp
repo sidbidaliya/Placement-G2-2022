@@ -3,23 +3,20 @@ class Solution
 public:
     bool isAnagram(string s, string t)
     {
-        map<char, int> freq;
-        int i = 0, n;
-        n = s.size();
+        vector<vector<int>> v(26, vector<int>(2, 0));
+        int i = 0;
+        for (i = 0; i < s.size(); i++)
+            v[s[i] - 'a'][0]++;
 
-        if (n != t.size())
-            return false;
+        for (i = 0; i < t.size(); i++)
+            v[t[i] - 'a'][1]++;
 
-        for (i = 0; i < n; i++)
+        for (i = 0; i < 26; i++)
         {
-            freq[s.at(i)]++;
-            freq[t.at(i)]--;
-        }
-        for (auto it : freq)
-        {
-            if (it.second < 0)
+            if (v[i][0] != v[i][1])
                 return false;
         }
+
         return true;
     }
 };
